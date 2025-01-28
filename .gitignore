@@ -1,0 +1,7 @@
+.env
+venv/
+app/__pycache__/
+app/gifts/__pycache__/
+app/users/__pycache__/
+app/wishlists/__pycache__/
+app/dao/__pycache__/
