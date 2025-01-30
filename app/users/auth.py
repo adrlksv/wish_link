@@ -1,7 +1,7 @@
 from passlib.context import CryptContext
 
 from jose import jwt 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from app.config import settings
 
 from pydantic import EmailStr
@@ -22,16 +22,16 @@ def verify_password(plain_password, hashed_password) -> bool:
 
 def create_access_token(data: dict) -> str:
     to_encode = data.copy()
-    expire = datetime.now(timezone.utc) + timedelta(days=30)
+    expire = datetime.utcnow() + timedelta(days=30)
     to_encode.update({"exp": expire})
-    encode_jwt = jwt.encode(
+    encoded_jwt = jwt.encode(
         to_encode, settings.SECRET_KEY, settings.ALGORITHM
     )
-    return encode_jwt
+    return encoded_jwt
 
 
 async def authenticate_user(email: EmailStr, password: str):
     user = await UserDAO.find_one_or_none(email=email)
-    if not user and not verify_password(password, user.password):
+    if not user or not verify_password(password, user.hashed_password):
         return None
     return user
