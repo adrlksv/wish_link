@@ -1,10 +1,9 @@
 from pydantic import BaseModel
 
-from typing import Optional
-
 
 class SGift(BaseModel):
     name: str
     gift_link: str
-    
-    pass
+    photo_link: str
+    description: str
+    price: int
