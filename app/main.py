@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.users.router import router as user_router
 from app.wishlists.router import router as wishlist_router
-from app.wishlists.router import router as gift_router
+from app.gifts.router import router as gift_router
 
 
 app = FastAPI()

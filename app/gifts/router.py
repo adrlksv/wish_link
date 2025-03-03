@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from app.users.dependencies import get_current_user
+from app.auth.dependencies import get_current_user
 from app.users.models import User
 from app.gifts.schemas import SGift
 from app.gifts.dao import GiftDAO

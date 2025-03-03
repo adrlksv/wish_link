@@ -1,4 +1,8 @@
-from sqlalchemy import Integer, String, Column, Date, ForeignKey
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+
+from datetime import date
+
 
 from app.database import Base
 
@@ -6,8 +10,8 @@ from app.database import Base
 class Wishlist(Base):
     __tablename__ = "wishlist"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    gift_count = Column(Integer)
-    to_date = Column(Date)
-    user_id = Column(ForeignKey("user.id"))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
+    gift_count: Mapped[int]
+    to_date: Mapped[date]
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))

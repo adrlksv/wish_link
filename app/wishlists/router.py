@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Query
 
-from app.users.dependencies import get_current_user
+from app.auth.dependencies import get_current_user
 
 from app.wishlists.dao import WishlistDAO
 from app.users.models import User

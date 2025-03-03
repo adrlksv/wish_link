@@ -1,8 +1,8 @@
-"""Initial migration
+"""models
 
-Revision ID: 4b46f0be6fc6
+Revision ID: c2b4b8026096
 Revises: 
-Create Date: 2025-01-28 13:03:05.405801
+Create Date: 2025-03-03 13:51:50.413133
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '4b46f0be6fc6'
+revision: str = 'c2b4b8026096'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -31,18 +31,20 @@ def upgrade() -> None:
     op.create_table('wishlist',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('gift_count', sa.Integer(), nullable=True),
-    sa.Column('to_date', sa.Date(), nullable=True),
+    sa.Column('gift_count', sa.Integer(), nullable=False),
+    sa.Column('to_date', sa.Date(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('gift',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('gift_link', sa.String(), nullable=False),
-    sa.Column('photo_link', sa.String(), nullable=True),
-    sa.Column('wishlist_id', sa.Integer(), nullable=True),
-    sa.Column('description', sa.String(), nullable=True),
-    sa.Column('price', sa.Integer(), nullable=True),
+    sa.Column('photo_link', sa.String(), nullable=False),
+    sa.Column('wishlist_id', sa.Integer(), nullable=False),
+    sa.Column('description', sa.String(), nullable=False),
+    sa.Column('price', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['wishlist_id'], ['wishlist.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
